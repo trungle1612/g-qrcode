@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://<trungle1612>.github.io/g-qrcode",
+  "homepage": "https://trungle1612.github.io/g-qrcode",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
