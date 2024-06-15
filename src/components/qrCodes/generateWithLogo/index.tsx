@@ -1,5 +1,4 @@
 import { type FC, useRef, useId } from "react";
-import * as htmlToImage from "html-to-image";
 import { QRCode } from "react-qrcode-logo";
 
 type GenerateQrCodeProps = {
