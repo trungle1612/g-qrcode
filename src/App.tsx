@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import "./App.css";
 import { GenerateQrCode } from "./components/qrCodes/generate";
+import { GenerateQrCodeWithLogo } from "./components/qrCodes/generateWithLogo"
 
 function App() {
   type qrCodes = {
@@ -67,7 +68,7 @@ function App() {
 
   return (
     <div className="container">
-      {url && <GenerateQrCode url={url} />}
+      {url && <GenerateQrCodeWithLogo url={url} logoUrl="/g-qrcode/trung-tam-bao-tang.jpeg" />}
       {qrCodes.length > 0 && (
         <div>
           {qrCodes.map((qrCode) => (
