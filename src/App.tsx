@@ -82,7 +82,7 @@ function App() {
               : "/g-qrcode/trung-tam-bao-tang.jpeg"
           }
           bgColor="#FFF"
-          qrStyle={logoType === "bao-tang" ? "squares" : "squares"}
+          qrStyle={logoType === "bao-tang" ? "dots" : "squares"}
         />
       )}
       {qrCodes.length > 0 && (
