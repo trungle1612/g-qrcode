@@ -103,7 +103,7 @@ function App() {
               checked={logoType === "bao-tang"}
               onChange={(e) => handleLogoTypeChange(e)}
             />
-            Logo Bảo tàng di tích Cố Đô
+            Logo Bảo tàng cổ vật
           </label>
           <label>
             <input
