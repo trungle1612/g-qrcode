@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import "./App.css";
 import { GenerateQrCode } from "./components/qrCodes/generate";
-import { GenerateQrCodeWithLogo } from "./components/qrCodes/generateWithLogo"
+import { GenerateQrCodeWithLogo } from "./components/qrCodes/generateWithLogo";
 
 function App() {
   type qrCodes = {
@@ -13,6 +13,7 @@ function App() {
   const [type, setType] = useState("directly");
   const [isValid, setIsValid] = useState(true);
   const [qrCodes, setQrCodes] = useState<qrCodes[]>([]);
+  const [logoType, setLogoType] = useState("bao-tang");
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setType(e.target.value);
@@ -24,6 +25,10 @@ function App() {
     if (input) {
       setUrl(input.value);
     }
+  };
+
+  const handleLogoTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLogoType(e.target.value);
   };
 
   const handleOnClickFileType = () => {
@@ -68,7 +73,18 @@ function App() {
 
   return (
     <div className="container">
-      {url && <GenerateQrCodeWithLogo url={url} logoUrl="/g-qrcode/trung-tam-bao-tang.jpeg" />}
+      {url && (
+        <GenerateQrCodeWithLogo
+          url={url}
+          logoUrl={
+            logoType === "bao-tang"
+              ? "/g-qrcode/bao-tang-di-tich-co-do.jpg"
+              : "/g-qrcode/trung-tam-bao-tang.jpeg"
+          }
+          bgColor="#FFF"
+          qrStyle={logoType === "bao-tang" ? "squares" : "squares"}
+        />
+      )}
       {qrCodes.length > 0 && (
         <div>
           {qrCodes.map((qrCode) => (
@@ -78,6 +94,28 @@ function App() {
       )}
 
       <div className="form">
+        <div>
+          <label>
+            <input
+              type="radio"
+              name="logoType"
+              value="bao-tang"
+              checked={logoType === "bao-tang"}
+              onChange={(e) => handleLogoTypeChange(e)}
+            />
+            Logo Bảo tàng di tích Cố Đô
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="logoType"
+              value="trung-tam"
+              checked={logoType === "trung-tam"}
+              onChange={(e) => handleLogoTypeChange(e)}
+            />
+            Logo Trung tâm bảo tồn di tích Cố Đô
+          </label>
+        </div>
         <div>
           <label>
             <input

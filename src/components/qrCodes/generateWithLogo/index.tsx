@@ -4,11 +4,15 @@ import { QRCode } from "react-qrcode-logo";
 type GenerateQrCodeProps = {
   url: string;
   logoUrl?: string;
+  bgColor?: string;
+  qrStyle?: "dots" | "squares" | "fluid";
 };
 
 export const GenerateQrCodeWithLogo: FC<GenerateQrCodeProps> = ({
   url,
   logoUrl,
+  bgColor,
+  qrStyle = "squares",
 }) => {
   const qrCodeRef = useRef(null);
   const domainName = url.replace(
@@ -32,6 +36,10 @@ export const GenerateQrCodeWithLogo: FC<GenerateQrCodeProps> = ({
         logoImage={logoUrl}
         ref={qrCodeRef}
         id={id}
+        bgColor={bgColor}
+        qrStyle={qrStyle}
+        fgColor="#01589d"
+        eyeRadius={10}
       />
       <button onClick={downloadQRCodeWithImage}>Tải QR Code</button>
     </div>
