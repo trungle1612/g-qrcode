@@ -6,6 +6,7 @@ type GenerateQrCodeProps = {
   logoUrl?: string;
   bgColor?: string;
   qrStyle?: "dots" | "squares" | "fluid";
+  fgColor?: string;
 };
 
 export const GenerateQrCodeWithLogo: FC<GenerateQrCodeProps> = ({
@@ -13,6 +14,7 @@ export const GenerateQrCodeWithLogo: FC<GenerateQrCodeProps> = ({
   logoUrl,
   bgColor,
   qrStyle = "squares",
+  fgColor = "#01589d",
 }) => {
   const qrCodeRef = useRef(null);
   const domainName = url.replace(
@@ -38,7 +40,7 @@ export const GenerateQrCodeWithLogo: FC<GenerateQrCodeProps> = ({
         id={id}
         bgColor={bgColor}
         qrStyle={qrStyle}
-        fgColor="#01589d"
+        fgColor={fgColor}
         eyeRadius={10}
       />
       <button onClick={downloadQRCodeWithImage}>Tải QR Code</button>

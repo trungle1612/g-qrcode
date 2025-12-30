@@ -14,10 +14,8 @@ function App() {
   const [isValid, setIsValid] = useState(true);
   const [qrCodes, setQrCodes] = useState<qrCodes[]>([]);
   const [logoType, setLogoType] = useState("bao-tang");
-
-  const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setType(e.target.value);
-  };
+  const [qrStyle, setQrStyle] = useState("squares");
+  const [fgColor, setFgColor] = useState("01589d");
 
   const handleClick = () => {
     const input = document.querySelector("input[name=url]") as HTMLInputElement;
@@ -27,8 +25,16 @@ function App() {
     }
   };
 
-  const handleLogoTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLogoTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setLogoType(e.target.value);
+  };
+
+  const handleQrStyleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setQrStyle(e.target.value);
+  };
+
+  const handleFgColorChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFgColor(e.target.value);
   };
 
   const handleOnClickFileType = () => {
@@ -77,12 +83,15 @@ function App() {
         <GenerateQrCodeWithLogo
           url={url}
           logoUrl={
-            logoType === "bao-tang"
-              ? "/g-qrcode/bao-tang-di-tich-co-do.jpg"
-              : "/g-qrcode/trung-tam-bao-tang.jpeg"
+            logoType !== ""
+              ? logoType === "bao-tang"
+                ? "/g-qrcode/bao-tang-di-tich-co-do.jpg"
+                : "/g-qrcode/trung-tam-bao-tang.jpeg"
+              : ""
           }
           bgColor="#FFF"
-          qrStyle={logoType === "bao-tang" ? "dots" : "squares"}
+          qrStyle={qrStyle as "squares" | "dots" | "fluid"}
+          fgColor={`#${fgColor}`}
         />
       )}
       {qrCodes.length > 0 && (
@@ -94,47 +103,48 @@ function App() {
       )}
 
       <div className="form">
-        <div>
+        <div className="form-group">
           <label>
-            <input
-              type="radio"
-              name="logoType"
-              value="bao-tang"
-              checked={logoType === "bao-tang"}
-              onChange={(e) => handleLogoTypeChange(e)}
-            />
-            Logo Bảo tàng cổ vật
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="logoType"
-              value="trung-tam"
-              checked={logoType === "trung-tam"}
-              onChange={(e) => handleLogoTypeChange(e)}
-            />
-            Logo Trung tâm bảo tồn di tích Cố Đô
+            Chọn màu sắc QR Code:
+            <select
+              name="fgColor"
+              value={fgColor}
+              onChange={(e) => handleFgColorChange(e)}
+            >
+              <option value="01589d">Xanh</option>
+              <option value="000000">Đen</option>
+            </select>
           </label>
         </div>
-        <div>
+
+        <div className="form-group">
           <label>
-            <input
-              type="radio"
-              name="type"
-              value="directly"
-              checked={type === "directly"}
-              onChange={(e) => handleTypeChange(e)}
-            />
-            Trực tiếp
+            Chọn Logo:
+            <select
+              name="logoType"
+              value={logoType}
+              onChange={(e) => handleLogoTypeChange(e)}
+            >
+              <option value="">Không logo</option>
+              <option value="bao-tang">Logo Bảo tàng cổ vật</option>
+              <option value="trung-tam">
+                Logo Trung tâm bảo tồn di tích Cố Đô
+              </option>
+            </select>
           </label>
+        </div>
+        <div className="form-group">
           <label>
-            <input
-              type="radio"
-              name="type"
-              value="file"
-              onChange={(e) => handleTypeChange(e)}
-            />
-            File
+            Chọn loại QR Code:
+            <select
+              name="qrStyle"
+              value={qrStyle}
+              onChange={(e) => handleQrStyleChange(e)}
+            >
+              <option value="squares">QR Code vuông</option>
+              <option value="dots">QR Code dấu chấm</option>
+              <option value="fluid">QR Code fluid</option>
+            </select>
           </label>
         </div>
         {type === "directly" && (
