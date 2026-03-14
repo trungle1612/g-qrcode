@@ -223,6 +223,22 @@
   }
 }
 
+/* Document page — full viewport, escapes #root constraints */
+.document-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.document-page iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .form,
