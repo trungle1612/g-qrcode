@@ -1,10 +1,12 @@
 export function DocumentViewer() {
-  const pdfUrl = "/g-qrcode/Bao tang CVCD.pdf";
+  const pdfUrl =
+    "https://trungle1612.github.io/g-qrcode/Bao%20tang%20CVCD.pdf";
+  const viewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true`;
 
   return (
     <div className="document-page">
       <iframe
-        src={pdfUrl}
+        src={viewerUrl}
         title="Bộ tài liệu Chương trình Giáo dục Di sản"
       >
         <p>
